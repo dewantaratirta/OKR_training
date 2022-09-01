@@ -5,6 +5,14 @@ namespace Icube\OkrDivisiCustomDewantara\Setup;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\DB\Ddl\Table;
+
+// Detail entity Acara
+// - nama
+// - pemateri
+// - peserta
+// Detail Peserta :
+//  - nama
  
 class InstallSchema implements InstallSchemaInterface
 {
@@ -12,38 +20,20 @@ class InstallSchema implements InstallSchemaInterface
     {
         $setup->startSetup();
  
-        $table = $setup->getConnection()->newTable(
-            $setup->getTable('icube_trainee')
-        )->addColumn(
-            'entity_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
-            'Entity Id'
-        )->addColumn(
-            'name',
-            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-            255,
-            [],
-            'Trainee Name'
-        )->addColumn(
-            'division',
-            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-            50,
-            [],
-            'Division'
-        )
-        ->addColumn(
-            'created_at',
-            \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME,
-            null,
-            ['nullable' => true, 'default' => null],
-            'Created Date'
-        );
-
-
+        # create table acara
+        $table = $setup->getConnection()->newTable($setup->getTable('icube_acara_dewantara'))
+        ->addColumn( 'id_acara', Table::TYPE_INTEGER, 4, ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true], 'ID Acara')
+        ->addColumn('nama', Table::TYPE_TEXT,255,[], 'Nama')
+        ->addColumn('pemateri', Table::TYPE_TEXT,255,[], 'Pemateri');
         $setup->getConnection()->createTable($table);
- 
+
+        # create table peserta
+        $table2 = $setup->getConnection()->newTable($setup->getTable('icube_peserta_dewantara'))
+        ->addColumn( 'id_peserta',Table::TYPE_INTEGER,4,['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],'ID Acara')
+        ->addColumn('id_acara',Table::TYPE_INTEGER,4,[],'Nama')
+        ->addColumn('nama',Table::TYPE_TEXT,255,[],'Nama');
+        $setup->getConnection()->createTable($table2);
+
         $setup->endSetup();
     }
 }
