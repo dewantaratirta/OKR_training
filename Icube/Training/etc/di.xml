@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- <preference for="Magento\Customer\Model\Customer" type="Icube\Training\Model\Customer" /> -->
+    <!-- <type name="Magento\Checkout\Model\Cart">
+        <plugin name="IcubeCart" type="Icube\Training\Model\Cart" sortOrder="1" />
+    </type> -->
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="IcubeProduct" type="Icube\Training\Model\Product" sortOrder="1"/>
+    </type>
+    
+    <!-- Api -->
+    <preference for="Icube\Training\Api\HelloInterface" type="Icube\Training\Model\Hello"/>
+    <preference for="Icube\Training\Api\Data\HelloDataInterface" type="Icube\Training\Model\HelloData"/>
+
+
+    <!-- CLI -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="training_cli" xsi:type="object">Icube\Training\Console\SayHello</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Icube\Training\Api\Data\TraineeInterface" type="Icube\Training\Model\Trainee"/>
+    <preference for="Icube\Training\Api\Data\TraineeSearchResultInterface" type="Magento\Framework\Api\SearchResultsInterface"/>
+</config>

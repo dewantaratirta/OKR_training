@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">trainee_edit_form.trainee_edit_form_data_source</item>
+            <item name="deps" xsi:type="string">trainee_edit_form.trainee_edit_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Trainee Detail</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">trainee_edit_form</item>
+            <!-- trainee_edit_form => sesuai nama file -->
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Icube\Training\Block\Adminhtml\Index\NewAction\BackButton</item>
+            <item name="delete" xsi:type="string">Icube\Training\Block\Adminhtml\Index\NewAction\DeleteButton</item>
+            <!-- Back dan Delete pake controller didalam tags -->
+            <item name="save" xsi:type="string">Icube\Training\Block\Adminhtml\Index\NewAction\SaveButton</item>
+            <!-- Controller untuk ngesave di line 32 -->
+        </item>
+    </argument>
+
+    <dataSource name="trainee_edit_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Icube\Training\Model\ResourceModel\Trainee\DataProvider</argument>
+            <!-- untuk form classnya dipanggil disini -->
+            <argument name="name" xsi:type="string">trainee_edit_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <!-- kolom di table -->
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <!-- fieldnya disamakan di listing sebelumnya -->
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="trainee/trainee/save"/>
+                    <!-- Controller untuk submit -->
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <!-- kumpulan dari field namanya fieldset -->
+    <fieldset name="trainee">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <!-- id biasa di hide, visible => false, default muncul -->
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">trainee</item>
+                    <item name="dataScope" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">trainee</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="division">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Division</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">trainee</item>
+                    <item name="dataScope" xsi:type="string">division</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

@@ -1,0 +1,36 @@
+<?php
+    $trainee = $block->getTraineeData();
+    $division = ['Backend', 'Frontend', 'Other' ];
+?>
+
+<h1><b>Update Form</b></h1>
+
+<form action="/training/index/update/" method="POST" style="width:30%">
+    <table >
+        <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><input type="text" name="name" value="<?= $trainee->getName()?>"/></td>
+        </tr>
+        <tr>
+            <td>Division</td>
+            <td>:</td>
+            <td>
+                <select name="division">
+                    <?php
+                        foreach( $division as $val ):
+                            $division_selected = ($val == $trainee->getDivision()) ? 'selected' : '';
+                    ?>
+                    <option value="<?= $val?>" <?= $division_selected?>>
+                            <?= $val ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <input type="hidden" name="id" value="<?= $trainee->getEntityId()?>">
+            <td colspan="3"><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>

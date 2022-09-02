@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="training" translate="label" sortOrder="1000">
+            <label>Training</label>
+        </tab>
+        <section id="training_setting" translate="label" type="text" sortOrder="101" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Training Setting</label>
+            <tab>training</tab>
+            <resource>Icube_Training::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <!-- define store value -->
+                <label>General</label>
+                <field id="rand_number" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Random Number</label>
+                </field>
+
+                <field id="training_header" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Training Header</label>
+                </field>
+
+                <field id="jobs" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Job Posting</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+
+        </section>
+
+    </system>
+</config>

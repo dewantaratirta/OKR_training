@@ -1,0 +1,56 @@
+<?php 
+/**	@var Icube\Training\Block $block */
+?>
+<div class="content">
+	<h1><b>Trainee List</b></h1>
+	<table class="table">
+	    <thead>
+	        <tr>
+	            <th><?php echo __('Name')?></th>
+	            <th><?php echo __('Division')?></th>
+	            <th><?php echo __('Registration Date')?></th>
+	            <th><?php echo __('Action')?></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <?php foreach ($block->getTraineeCollection() as $trainees) : ?>
+	        <tr>
+	            <td><?= $trainees->getName() ?></td>
+	            <td><?= $trainees->getDivision() ?></td>
+				<td><?= $trainees->getCreatedAt() ?></td>
+	            <td>
+					<?= '<a href="/training/index/updateform/id/'.$trainees->getEntityId().'">Edit</a>' ?> |
+					<?= '<a href="/training/index/remove/id/'.$trainees->getEntityId().'">Remove</a>' ?>
+				</td>
+	        </tr>
+	        <?php endforeach; ?>
+	    </tbody>
+	</table>
+	
+
+	<h4>Create New Trainee</h4>
+	<form action="/training/index/submit" method="POST" >
+		<table style="width: 30%;">
+			<tr>
+				<td>Name</td>
+				<td>:</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>Division</td>
+				<td>:</td>
+				<td>
+					<select name="division">
+						<option value="Backend" default>Backend</option>
+						<option value="Frontend">Frontend</option>
+						<option value="Other">Other</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3"><input type="submit" value="Save" /></td>
+			</tr>
+		</table>
+	</form>
+
+</div>

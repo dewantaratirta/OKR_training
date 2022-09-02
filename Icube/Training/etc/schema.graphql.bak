@@ -1,0 +1,21 @@
+type Query {
+    getHelloWorld(
+        datadiri: DataDiriInput! @doc(description: "Nama Kalian")
+    )
+    : GetHelloOutput @resolver(class:"Icube\\Training\\Model\\Resolver\\GetHelloWorld") @doc(description: "curtom graphql!")
+}
+
+input DataDiriInput {
+    name: String
+    division: String
+}
+
+type GetHelloOutput {
+    name: String
+    division: String
+    message: String @resolver(class:"Icube\\Training\\Model\\Resolver\\Gendhel")
+}
+
+type Currency {
+    is_rupiah: Boolean @resolver(class:"Icube\\Training\\Model\\Resolver\\Isrupiah") @doc(description: "apakah ini sebuah rupiah?")
+}

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">trainee_listing.trainee_listing_data_source</item>
+        </item>
+    </argument>
+    <!-- penamaan untuk argumen
+        trainee_listing -> nama file
+        trainee_listing_data_source -> data source yg di define di bawah
+     -->
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add New Trainee</label>
+            </button>
+        </buttons>
+        <spinner>trainee_columns</spinner>
+        <deps>
+            <dep>trainee_listing.trainee_listing_data_source</dep>
+        </deps>
+    </settings>
+    <!-- button
+        path="*/*/edit -> arah class
+        <label translate="true">Add New Trainee</label> -> label nama
+        <spinner>trainee_columns</spinner> -> spinner berputar2
+        trainee_listing_data_source -> data source yg di define di bawah
+     -->
+
+    <dataSource name="trainee_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Icube_Training::trainee_list</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="trainee_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <!-- 
+         <dataSource name="trainee_listing_data_source" -> nama datasource yg dipakai di atas  component="Magento_Ui/js/grid/provider"> -> ngikut aja />
+                 <aclResource>Icube_Training::trainee_list</aclResource> -> nama module :: nama resource
+
+                <requestFieldName>id</requestFieldName> -> label
+                <primaryFieldName>entity_id</primaryFieldName> -> primary id di database
+     -->
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure to delete selected trainee?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="trainee/trainee/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <!-- 
+        Setting toolbar
+        <sticky>true</sticky> -> sticky header
+        <bookmark name="bookmarks"/> -> tombol mata
+
+        <url path="trainee/trainee/massDelete"/> -> controller
+                <message translate="true">Are you sure to delete selected trainee?</message> -> confirm message
+     -->
+
+    <columns name="trainee_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <!-- inline edit here -->
+                    <item name="saveUrl" xsi:type="url" path="trainee/trainee/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <!-- index_field = primary key table -->
+                <param name="indexField" xsi:type="string">entity_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <!-- nama provider nama_listing.nama_listing.kolom.kolomtabel -->
+                <param name="selectProvider" xsi:type="string">trainee_listing.trainee_listing.trainee_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+            <!-- inline butuh childDefault ini -->
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">trainee_listing.trainee_listing.trainee_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <!-- ids yg di line 98 -->
+
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>entity_id</indexField>
+                <!-- kolom db -->
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="name" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="division" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Division</label>
+            </settings>
+        </column>
+        <!-- <column name="email" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Email</label>
+            </settings>
+        </column> -->
+
+        <!-- created at pake kolom buatan magento clas="" -->
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Icube\Training\Ui\Component\Listing\Column\Actions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

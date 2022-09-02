@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/training/hello" method="GET">
+        <service class="Icube\Training\Api\HelloInterface" method="getHelloWorld"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/training/getProduct/:id" method="GET">
+        <service class="Icube\Training\Api\HelloInterface" method="getProduct"/>
+        <resources>
+            <resource ref="anonymous" />
+            <!-- <resource ref="Magento_Backend::admin" /> -->
+        </resources>
+    </route>
+
+    <route url="/V1/training/trainee/" method="POST">
+        <service class="Icube\Training\Api\HelloInterface" method="createTrainee"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/training/trainee/:id" method="PUT">
+        <service class="Icube\Training\Api\HelloInterface" method="updateTrainee"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/training/trainee/:id" method="DELETE">
+        <service class="Icube\Training\Api\HelloInterface" method="deleteTrainee"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/training/trainee/:id" method="GET">
+            <service class="Icube\Training\Api\HelloInterface" method="getTraineeById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/training/trainees" method="GET">
+            <service class="Icube\Training\Api\HelloInterface" method="getTraineeBySearchCriteria"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    
+</routes>

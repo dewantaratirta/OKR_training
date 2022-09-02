@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icube_Training::trainee_menu"
+             title="Trainee"
+             module="Icube_Training"
+             sortOrder="20"
+             resource="Magento_Backend::content"
+            />
+
+        <add id="Icube_Training::trainee_list_header" 
+             title="Manage Trainers Header" 
+             module="Icube_Training" 
+             sortOrder="1" 
+             parent="Icube_Training::trainee_menu"  
+             resource="Icube_Training::trainee_list_header"/>
+
+        <add id="Icube_Training::trainee_list" 
+        	 title="Manage Trainers" 
+        	 module="Icube_Training" 
+        	 sortOrder="3" 
+        	 parent="Icube_Training::trainee_list_header" 
+        	 action="trainee/trainee/index" 
+        	 resource="Icube_Training::trainee_list"/>
+
+        <add id="Icube_Training::trainee_list_header_second" 
+             title="Manage Trainers Header Second" 
+             module="Icube_Training" 
+             sortOrder="4" 
+             parent="Icube_Training::trainee_menu"  
+             resource="Icube_Training::trainee_list_header"/>
+        <add id="Icube_Training::trainee_list_second" 
+             title="Manage Trainers" 
+             module="Icube_Training" 
+             sortOrder="5" 
+             parent="Icube_Training::trainee_list_header_second" 
+             action="trainee/trainee/index" 
+             resource="Icube_Training::trainee_list_second"/>
+    </menu>
+</config>
+
