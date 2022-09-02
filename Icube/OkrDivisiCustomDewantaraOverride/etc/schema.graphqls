@@ -22,3 +22,24 @@ type AcaraOutputDewantara @doc(description: "Data output acara v2") {
 input EditAcara @doc(description: "Edit Acara v2"){
 	tanggal_acara: String! @doc(description: "Tanggal Acara [YYYY-MM-DD]")
 }
+
+# Search Criteria
+type Query {
+    searchAcaraDewantara(
+        search: String @doc(description: "Performs a full-text search using the specified key words."),
+        filter: AcaraInputFilter @doc(description: "Identifies which colomns to search for and return."),
+        pageSize: Int = 6 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
+    ): searchCriteriaResultDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantaraOverride\\Model\\Resolver\\AcaraResolver") @doc(description: "Acara query returns the news according to passed arguments(search text, filter)")
+}
+
+type searchCriteriaResultDewantara @doc(description: "Data Output") {
+    items: [AcaraOutputDewantara]
+	page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+	total_count: Int
+}
+
+input AcaraInputFilter @doc(description: "AcaraFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    pemateri: FilterTypeInput @doc(description: "The News Monthly Archive to filter")
+    nama:FilterTypeInput @doc(description: "The News Category to filter.")
+}
