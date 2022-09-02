@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Icube\OkrDivisiCustomDewantara\Model\Resolver;
+namespace Icube\OkrDivisiCustomDewantaraOverride\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
-use Icube\OkrDivisiCustomDewantara\Model\AcaraFactory;
-use Icube\OkrDivisiCustomDewantara\Model\PesertaFactory;
+use Icube\OkrDivisiCustomDewantaraOverride\Model\AcaraFactory;
+use Icube\OkrDivisiCustomDewantaraOverride\Model\PesertaFactory;
 
-class EditAcara implements ResolverInterface
+class GetAcaraById implements ResolverInterface
 {
 
     public function __construct(
@@ -29,33 +29,20 @@ class EditAcara implements ResolverInterface
         array $args = null
     ) {
 
-        $input = $args['input'];
-
+        $id = $args['id'];
         $acara = $this->acaraFactory->create();
-        $acara = $acara->load($input['id']);
-
-        # check input
-        if( isset($input['nama']) ) {
-            $acara->setNama($input['nama']);
-        }
-
-        if( isset($input['pemateri']) ){
-            $acara->setPemateri($input['pemateri']);
-        }
-
-        # save data
-        $acara->save();
+        $acara = $acara->load($id);
 
         $peserta = $this->pesertaFactory->create();
-        $pesertaResult = $peserta->getCollection()->addFieldToFilter('id_acara',$acara->getId())->load();
+        $pesertaResult = $peserta->getCollection()->addFieldToFilter('id_acara',$id)->load();
 
         $result = array(
-            'id'        => $acara->getId(),
+            'id'        => $acara->getIdAcara(),
             'nama'      => $acara->getNama(),
             'pemateri'  => $acara->getPemateri(),
-            'peserta'   => $pesertaResult
+            'peserta'   => $pesertaResult,
+            'tanggal_acara'=> $acara->getTanggalAcara()
         );
-
         return $result;
     }
 }

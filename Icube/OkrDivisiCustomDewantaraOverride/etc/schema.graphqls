@@ -2,16 +2,23 @@
 # See COPYING.txt for license details.
 
 # Override
-type AcaraOutputDewantara @doc(description: "Data output acara v2") {
-	id: Int @doc(description: "Id acara")
-	nama: String @doc(description: "Nama Acara")
-	pemateri: String @doc(description: "Nama pemateri")
-    tanggal_acara: String @doc(description: "Tanggal Acara")
-	peserta: [PesertaOutput] @doc(description: "Daftar Peserta")
+type Query {
+    getAcaraDewantaraById (id: Int!) : AcaraOutputDewantara @resolver(class:"Icube\\OkrDivisiCustomDewantaraOverride\\Model\\Resolver\\GetAcaraById") @doc(description: "Edit Acara") @cache(cacheable: false)
 }
-input EditAcara @doc(description: "Edit Acara v2"){
-    id: Int! @doc(description: "Id acara")
-	nama: String @doc(description: "Nama acara")
-	pemateri: String @doc(description: "Nama pemateri")
+
+type Mutation {
+    buatAcaraDewantara(input: AcaraInputDewantara!) : AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantaraOverride\\Model\\Resolver\\CreateAcaraPeserta") @doc(description: "Buat Acara")
+    editAcaraDewantara(input: EditAcara) : AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantaraOverride\\Model\\Resolver\\EditAcara") @doc(description: "Edit Acara")
+}
+
+input AcaraInputDewantara {
+	tanggal_acara: String! @doc(description: "Tanggal Acara [YYYY-MM-DD]")
+}
+
+type AcaraOutputDewantara @doc(description: "Data output acara v2") {
     tanggal_acara: String @doc(description: "Tanggal Acara")
+}
+
+input EditAcara @doc(description: "Edit Acara v2"){
+	tanggal_acara: String! @doc(description: "Tanggal Acara [YYYY-MM-DD]")
 }

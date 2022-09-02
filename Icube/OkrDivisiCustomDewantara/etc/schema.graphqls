@@ -2,10 +2,8 @@
 # See COPYING.txt for license details.
 
 type Query {
-    getAllAcara: AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\GetAll") @doc(description: "Return information about the store's currency.") @cache(cacheable: false)
     getAcaraDewantaraById (id: Int!) : AcaraOutputDewantara @resolver(class:"Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\GetAcaraById") @doc(description: "Edit Acara") @cache(cacheable: false)
 }
-
 
 type Mutation {
     buatAcaraDewantara(input: AcaraInputDewantara!) : AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\CreateAcaraPeserta") @doc(description: "Buat Acara")
@@ -13,8 +11,8 @@ type Mutation {
 }
 
 input AcaraInputDewantara {
-	nama: String @doc(description: "Nama acara")
-	pemateri: String @doc(description: "Nama pemateri")
+	nama: String! @doc(description: "Nama acara")
+	pemateri: String! @doc(description: "Nama pemateri")
 	peserta: [PesertaInput!] @doc(description: "Daftar peserta")
 }
 

@@ -24,7 +24,7 @@ class InstallSchema implements InstallSchemaInterface
             $setup->getTable('icube_acara_dewantara'),
             'tanggal_acara',
             [
-                'type'      => Table::TYPE_DATETIME,
+                'type'      => Table::TYPE_DATE,
                 'length'    => null,
                 'nullable'  => true,
                 'default'   => null,
