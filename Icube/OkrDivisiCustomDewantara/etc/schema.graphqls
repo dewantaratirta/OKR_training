@@ -1,0 +1,40 @@
+# Copyright © Magento, Inc. All rights reserved.
+# See COPYING.txt for license details.
+
+type Query {
+    getAllAcara: AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\GetAll") @doc(description: "Return information about the store's currency.") @cache(cacheable: false)
+    getAcaraDewantaraById (id: Int!) : AcaraOutputDewantara @resolver(class:"Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\GetAcaraById") @doc(description: "Edit Acara") @cache(cacheable: false)
+}
+
+
+type Mutation {
+    buatAcaraDewantara(input: AcaraInputDewantara!) : AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\CreateAcaraPeserta") @doc(description: "Buat Acara")
+    editAcaraDewantara(input: EditAcara) : AcaraOutputDewantara @resolver(class: "Icube\\OkrDivisiCustomDewantara\\Model\\Resolver\\EditAcara") @doc(description: "Edit Acara")
+}
+
+input AcaraInputDewantara {
+	nama: String @doc(description: "Nama acara")
+	pemateri: String @doc(description: "Nama pemateri")
+	peserta: [PesertaInput!] @doc(description: "Daftar peserta")
+}
+
+input PesertaInput {
+	nama: String @doc(description: "Nama Peserta tulis disini")
+}
+
+type AcaraOutputDewantara @doc(description: "Data output acara") {
+	id: Int @doc(description: "Id acara")
+	nama: String @doc(description: "Nama Acara")
+	pemateri: String @doc(description: "Nama pemateri")
+	peserta: [PesertaOutput] @doc(description: "Daftar Peserta")
+}
+
+type PesertaOutput @doc(description: "output data peserta.") {
+	nama: String @doc(description: "Nama peserta")
+}
+
+input EditAcara {
+    id: Int! @doc(description: "Id acara")
+	nama: String @doc(description: "Nama acara")
+	pemateri: String @doc(description: "Nama pemateri")
+}

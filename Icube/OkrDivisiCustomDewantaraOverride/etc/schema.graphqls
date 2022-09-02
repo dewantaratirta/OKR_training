@@ -1,0 +1,17 @@
+# Copyright © Magento, Inc. All rights reserved.
+# See COPYING.txt for license details.
+
+# Override
+type AcaraOutputDewantara @doc(description: "Data output acara v2") {
+	id: Int @doc(description: "Id acara")
+	nama: String @doc(description: "Nama Acara")
+	pemateri: String @doc(description: "Nama pemateri")
+    tanggal_acara: String @doc(description: "Tanggal Acara")
+	peserta: [PesertaOutput] @doc(description: "Daftar Peserta")
+}
+input EditAcara @doc(description: "Edit Acara v2"){
+    id: Int! @doc(description: "Id acara")
+	nama: String @doc(description: "Nama acara")
+	pemateri: String @doc(description: "Nama pemateri")
+    tanggal_acara: String @doc(description: "Tanggal Acara")
+}
