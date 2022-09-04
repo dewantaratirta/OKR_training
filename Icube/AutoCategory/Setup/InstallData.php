@@ -55,7 +55,7 @@ class InstallData implements InstallDataInterface
             Product::ENTITY,
             'exclude_from_new',
             [
-                'label' => 'Exclude From New(Dewantara)',
+                'label' => 'Exclude From New',
                 'type' => 'int',
                 'input' => 'boolean',
                 'required' => false,
@@ -75,7 +75,7 @@ class InstallData implements InstallDataInterface
                 Product::ENTITY,
                 'sale',
                 [
-                    'label' => 'Sale(Dewantara)',
+                    'label' => 'Sale',
                     'type' => 'int',
                     'input' => 'boolean',
                     'required' => false,
